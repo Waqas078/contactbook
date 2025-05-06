@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Home - Contact Book{% endblock %}
+
+{% block content %}
+    <h2>🗂️ Welcome to Contact Book!</h2>
+    <p>Manage your personal contacts securely and efficiently.</p>
+
+    <h3>🔐 User Authentication</h3>
+    <ul>
+        <li>Secure login and logout with Django’s authentication system</li>
+        <li>Only registered users can access and manage contacts</li>
+        <li>Unauthorized users are redirected to the login page</li>
+    </ul>
+
+    <h3>📇 Contact Management</h3>
+    <ul>
+        <li>Add contacts with Name, Phone, Email, and Address</li>
+        <li>View a personalized contact list</li>
+        <li>Edit or delete your contacts anytime</li>
+    </ul>
+
+    <h3>🚫 Your Data is Safe</h3>
+    <ul>
+        <li>Each user’s contacts are private and accessible only to them</li>
+    </ul>
+
+    <h3>🔍 Search Functionality (optional)</h3>
+    <ul>
+        <li>Quickly find contacts by name or email</li>
+    </ul>
+
+    
+{% endblock %}

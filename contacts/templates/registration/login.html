@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <h2>Login to Contact Book</h2>
+    {% if form.errors %}
+        <p style="color: red;">Invalid username or password. Please try again.</p>
+    {% endif %}
+    {% if next %}
+        <p style="color: blue;">Please log in to access that page.</p>
+    {% endif %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label for="{{ form.username.id_for_label }}">Username:</label></td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td><label for="{{ form.password.id_for_label }}">Password:</label></td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="hidden" name="next" value="{{ next|default:'/contact_list/' }}">
+        <button type="submit">Login</button>
+        <p><a href="{% url 'register' %}">Don't have an account? Register here.</a></p>
+    </form>
+{% endblock %}

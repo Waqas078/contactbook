@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+    <h2>Search Results</h2>
+    <p><a href="{% url 'contact_create' %}">Add New Contact</a></p>
+    <form method="get" action="{% url 'contact_search' %}" style="margin-bottom: 20px;">
+        <input type="text" name="q" value="{{ query|default_if_none:'' }}" placeholder="Search by name or email">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if contacts %}
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background-color: #f2f2f2; text-align: left;">
+                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Name</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Email</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Phone</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Address</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 8px; border: 1px solid #ddd;">{{ contact.name }}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">{{ contact.email|default:"-" }}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">{{ contact.phone|default:"-" }}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">{{ contact.address|default:"-" }}</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">
+                            <a href="{% url 'contact_update' contact.pk %}" style="text-decoration: none; color: #007BFF;">Edit</a> |
+                            <a href="{% url 'contact_delete' contact.pk %}" style="text-decoration: none; color: #FF0000;">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No contacts found for "{{ query|default:'your search' }}".</p>
+    {% endif %}
+{% endblock %}
